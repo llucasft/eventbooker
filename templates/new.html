@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Eventbooker</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    </head>
+    <body>
+        <div class="container">
+          <div class="page-header">
+              <h1>Adicionar novo evento</h1>
+          </div>
+          <form action="{{ url_for('create') }}" method="post" method="post">
+            <fieldset>
+              <div class="form-group">
+                <label for="nome">Título</label>
+                <input type="text" id="name" name="name" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="categoria">Categoria</label>
+                <input type="text" id="category" name="category" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="categoria">Descrição</label>
+                <textarea  id="description" name="description" class="form-control"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="console">Local</label>
+                <input type="text" id="address" name="address" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+            </fieldset>
+          </form>
+            <!-- <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script> -->
+        </div>
+    </body>
+</html>
