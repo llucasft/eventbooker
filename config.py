@@ -1,8 +1,3 @@
-SQLALCHEMY_DATABASE_URI = \
-    '{SGBD}://{usuario}:{senha}@{servidor}/{database}'.format(
-        SGBD = 'mysql+mysqlconnector',
-        usuario = 'root',
-        senha = '',
-        servidor = 'localhost',
-        database = 'jogoteca'
-    )
+SECRET_KEY = 'eventbooker'
+
+SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:26Lucas.@localhost:5432/eventbooker'
