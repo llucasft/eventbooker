@@ -1,37 +1,55 @@
 from flask import Flask, render_template, session, redirect, request, flash, url_for
-
-class Event:
-    def __init__(self, name, category, address):
-        self.name=name
-        self.category=category
-        self.address=address
-
-event1 = Event('Reunião de vizinhos', 'Reunião', 'Auditório do condomínio')
-event2 = Event('Culto de Páscoa', 'Culto', 'Igreja Batista')
-event3 = Event('Show do Luan', 'Show', 'Praça central')
-
-events = [event1, event2, event3]
-
-class User:
-    def __init__(self, name, username, password):
-        self.name = name
-        self.username = username
-        self.password = password
-
-user1 = User("Bruno Divino", "BD", "alohomora")
-user2 = User("Lucas Ferreira", "lucas", "1234")
-user3 = User("Guilherme Louro", "Cake", "python_eh_vida")
-
-users = { user1.username : user1,
-             user2.username : user2,
-             user3.username : user3 }
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = 'eventbooker'
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:26Lucas.@localhost:5432/eventbooker'
+
+db = SQLAlchemy(app)
+
+class Usuario(db.Model):
+    __tablename__ = 'usuarios'
+
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(50), nullable=False)
+    telefone = db.Column(db.String(40), nullable=False)
+    email = db.Column(db.String(50), nullable=False)
+    senha = db.Column(db.String(20), nullable=False)
+
+    def __repr__(self):
+        return '<Name %r>' % self.name
+    
+class Evento(db.Model):
+    __tablename__ = 'eventos'
+
+    id = db.Column(db.Integer, primary_key=True)
+    titulo = db.Column(db.String(100), nullable=False)
+    descricao = db.Column(db.Text, nullable=False)
+    data_evento = db.Column(db.Date, nullable=False)
+    hora = db.Column(db.Time)
+    local_evento = db.Column(db.Text, nullable=False)
+    id_usuario = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return '<Name %r>' % self.name
+    
+class Participante(db.Model):
+    __tablename__ = 'participantes'
+
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(50), nullable=False)
+    telefone = db.Column(db.String(40), nullable=False)
+    email = db.Column(db.String(50), nullable=False)
+    id_evento = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Name %r>' % self.name
+
 @app.route('/')
 def index():
-    return render_template('list.html', events=events)
+    eventos = Evento.query.order_by(Evento.id)
+    return render_template('list.html', eventos=eventos)
 
 @app.route('/login')
 def login():

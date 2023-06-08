@@ -15,16 +15,16 @@
     <thead class="thead-default">
         <tr>
             <th>Nome</th>
-            <th>Categoria</th>
-            <th>Endereço</th>
+            <th>Descrição</th>
+            <th>Local</th>
         </tr>
     </thead>
     <tbody>
-        {% for event in events %}
+        {% for evento in eventos %}
         <tr>
-            <td>{{ event.name }}</td>
-            <td>{{ event.category }}</td>
-            <td>{{ event.address }}</td>
+            <td>{{ evento.titulo }}</td>
+            <td>{{ evento.descricao }}</td>
+            <td>{{ evento.local_evento }}</td>
         </tr>
         {% endfor %}
 
