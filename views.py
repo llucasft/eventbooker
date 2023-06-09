@@ -1,7 +1,7 @@
 from flask import render_template, session, redirect, request, flash, url_for
 
 from main import app, db
-from models import Usuario, Evento, Participante
+from models import Usuario, Evento
 
 @app.route('/')
 def index():
