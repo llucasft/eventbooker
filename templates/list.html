@@ -27,6 +27,7 @@
             <td>{{ evento.descricao }}</td>
             <td>{{ evento.local_evento }}</td>
             <td><a href="{{ url_for('edit', id=evento.id) }}">Editar</a></td>
+            <td><a href="{{ url_for('delete', id=evento.id) }}">Deletar</a></td>
         </tr>
         {% endfor %}
 

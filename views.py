@@ -79,6 +79,16 @@ def update():
 
     return redirect(url_for('index'))
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    if 'logged_user' not in session or session['logged_user'] == None:
+        return redirect(url_for('login'))
+    
+    Evento.query.filter_by(id=id).delete()
+    db.session.commit()
+    flash('Evento excluído com sucesso!')
+    return redirect(url_for('index'))
+
 @app.route('/logout')
 def logout():
     session['logged_user'] = None
