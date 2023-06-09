@@ -67,7 +67,17 @@ def edit(id):
 
 @app.route('/update', methods=['POST',])
 def update():
-    pass
+    evento = Evento.query.filter_by(id=request.form['id']).first()
+    evento.titulo = request.form['titulo']
+    evento.descricao = request.form['descricao']
+    evento.data_evento = request.form['data']
+    evento.local_evento = request.form['local']
+    evento.hora = request.form['hora']
+
+    db.session.add(evento)
+    db.session.commit()
+
+    return redirect(url_for('index'))
 
 @app.route('/logout')
 def logout():
