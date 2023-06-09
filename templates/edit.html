@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Eventbooker</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    </head>
+    <body>
+        <div class="container">
+          <div class="page-header">
+              <h1>{{titulo}}</h1>
+          </div>
+          <form action="{{ url_for('update') }}" method="post" method="post">
+            <fieldset>
+              <div class="form-group">
+                <label for="nome">Título</label>
+                <input type="text" id="titulo" name="titulo" class="form-control", value="{{ evento.titulo }}">
+              </div>
+              <div class="form-group">
+                <label for="categoria">Descrição</label>
+                <input type="text" id="descricao" name="descricao" class="form-control" value="{{ evento.descricao }}">
+              </div>
+              <div class="form-group">
+                <label for="categoria">Local</label>
+                <textarea  id="local" name="local" class="form-control" value="{{ evento.local_evento }}"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="console">Data</label>
+                <input type="date" id="data" name="data" class="form-control" value="{{ evento.data_evento }}">
+              </div>
+              <div class="form-group">
+                <label for="console">Horário</label>
+                <input type="time" id="hora" name="hora" class="form-control" value="{{ evento.hora }}">
+              </div>
+              <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+            </fieldset>
+          </form>
+            <!-- <script type="text/javascript" src="{{ url_for('static', filename='jquery.js') }}"></script>
+            <script type="text/javascript" src="{{ url_for('static', filename='app.js') }}"></script> -->
+        </div>
+    </body>
+</html>

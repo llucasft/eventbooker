@@ -57,6 +57,18 @@ def create():
 
     return redirect(url_for('index'))
 
+@app.route('/edit/<int:id>')
+def edit(id):
+    if 'logged_user' not in session or session['logged_user'] == None:
+        return redirect(url_for('login', next=url_for('edit')))
+    
+    evento = Evento.query.filter_by(id=id).first()
+    return render_template('edit.html', titulo='Editando evento', evento=evento)
+
+@app.route('/update', methods=['POST',])
+def update():
+    pass
+
 @app.route('/logout')
 def logout():
     session['logged_user'] = None
